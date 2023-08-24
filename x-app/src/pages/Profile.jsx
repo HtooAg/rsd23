@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Avatar } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { pink, blue } from "@mui/material/colors";
 import PostCard from "../components/PostCard";
 import { useParams } from "react-router-dom";
 
@@ -36,7 +36,7 @@ export default function Profile() {
               mb: 12,
             }}>
             <Avatar
-              sx={{ background: blue[500], width: 128, height: 128, mb: -6 }}>
+              sx={{ background: pink[500], width: 128, height: 128, mb: -6 }}>
               {posts.length > 0 ? posts[0].user.name.charAt(0) : "A"}
             </Avatar>
           </Box>

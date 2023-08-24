@@ -6,12 +6,26 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
+
 import { pink, blue } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
+
 import { formatRelative, parseISO } from "date-fns";
-export default function PostCard({ post }) {
+
+export default function PostCard({ post, primary }) {
+  const navigate = useNavigate();
+
   return (
-    <Card key={post._id} sx={{ mb: 1 }} variant="outlined">
-      <CardActionArea>
+    <Card
+      sx={{
+        mb: primary ? 3 : 1,
+        bgcolor: primary ? "#def" : "transparent",
+      }}
+      variant="outlined">
+      <CardActionArea
+        onClick={() => {
+          navigate(`/comments/${post._id}`);
+        }}>
         <CardContent sx={{ display: "flex", p: 2 }}>
           <Box sx={{ mr: 3 }}>
             <Avatar
@@ -19,7 +33,7 @@ export default function PostCard({ post }) {
               sx={{
                 width: 64,
                 height: 64,
-                bgcolor: pink[500],
+                bgcolor: primary ? blue[500] : pink[500],
               }}>
               {post.user.name.charAt(0)}
             </Avatar>
@@ -34,14 +48,22 @@ export default function PostCard({ post }) {
                 @{post.user.handle}
               </Typography>
 
-              <Typography component="span" sx={{ ml: 1, color: pink[400] }}>
+              <Typography
+                component="span"
+                sx={{
+                  ml: 1,
+                  color: primary ? blue[500] : pink[400],
+                }}>
                 <small>
                   {formatRelative(parseISO(post.created), new Date())}
                 </small>
               </Typography>
             </Box>
 
-            <Typography variant="subtitle1" color="text.secondary">
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{ fontSize: primary ? 21 : 18 }}>
               {post.body}
             </Typography>
           </Box>
